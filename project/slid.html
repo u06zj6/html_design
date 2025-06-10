@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>超跑資訊網</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <script src="jquery-1.10.2.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: '微軟正黑體';
+    }
+    #header {
+      position: relative;
+      width: 100%;
+      height: 900px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    #slider {
+      display: flex;
+      width: calc(1920px * 5);
+      height: 900px;
+      transition: transform 0.8s ease-in-out;
+    }
+    .slide {
+      width: 1920px;
+      height: 900px;
+      object-fit: cover;
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 60px;
+      color: white;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .arrow:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .arrow-left {
+      left: 10px;
+    }
+    .arrow-right {
+      right: 10px;
+    }
+    #top-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #top-view ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    }
+
+    #top-view ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    padding-right: 40px;
+    }
+
+    #top-view ul li a:hover {
+    text-decoration: underline;
+    }
+
+
+
+  </style>
+  <script>
+    $(function(){
+      $("ul.subs").hide();
+      $("div.main").click(function(){
+        $("ul.subs").slideUp();
+        $("div.main").removeClass("open");
+        if($("+ul",this).css("display")=="none"){
+          $("+ul",this).slideDown();
+          $(this).addClass("open");
+        }
+        }).mouseover(function () {
+        	$(this).addClass("rollover");
+        }).mouseout(function(){
+            $(this).removeClass("rollover");
+        });
+
+      let currentIndex = 0;
+      const totalSlides = 5;
+      function updateSlider() {
+        $('#slider').css('transform', `translateX(${-1920 * currentIndex}px)`);
+      }
+      $('.arrow-right').click(function () {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+      });
+      $('.arrow-left').click(function () {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      });
+      setInterval(function () {
+        $('.arrow-right').click();
+      }, 6000);
+    });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-type="main"]').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.content-block').forEach(block => {
+          block.style.display = 'none';
+        });
+        const targetId = el.dataset.target;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.style.display = 'block';
+        }
+      });
+    });
+
+    // 預設顯示 news 區塊
+    document.querySelectorAll('.content-block').forEach(block => {
+      block.style.display = 'none';
+    });
+    const defaultEl = document.getElementById('news');
+    if (defaultEl) {
+      defaultEl.style.display = 'block';
+    }
+  });
+  </script>
+</head>
+<body>
+    <div id="top-view">
+    <ul>
+      <li><a href="#">首頁.HOME</a></li>
+      <li><a href="#">聯絡我們</a></li>
+    </ul>
+  </div>
+  <div id="header">
+    <div id="slider">
+      <img src="images/background1.jpg" class="slide" />
+      <img src="images/background2.jpg" class="slide" />
+      <img src="images/background3.jpg" class="slide" />
+      <img src="images/background4.jpg" class="slide" />
+      <img src="images/background5.jpg" class="slide" />
+    </div>
+    <div class="arrow arrow-left">&#10094;</div>
+    <div class="arrow arrow-right">&#10095;</div>
+    <div id="header-nav">
+      <ul>
+        <li><a href="slid.html">首頁.HOME</a></li>
+        <li><a href="#">聯絡我們</a></li>
+      </ul>
+    </div>
+  </div>
+
+<div id="wrapper" class="clearfix">
+  <div id="nav">
+    <ul>
+      <li class="color-black">
+        <div class="main" data-type="main" data-target="news">📢 最新消息</div>
+        <ul class="subs">
+          <li><a href="#" data-type="sub" data-target="news-discount">新車優惠</a></li>
+          <li><a href="#" data-type="sub" data-target="news-intro">新車介紹</a></li>
+          <li><a href="#" data-type="sub" data-target="news-events">活動消息 / 展示會</a></li>
+          <li><a href="#" data-type="sub" data-target="news-limited">限量車款發售</a></li>
+          <li><a href="#" data-type="sub" data-target="news-brand">品牌動態</a></li>
+        </ul>
+      </li>
+      <li class="color-black">
+        <div class="main" data-type="main" data-target="car-overview">🚗 車種分類</div>
+        <ul class="subs">
+          <li><a href="#" data-type="sub" data-target="type-sports">跑車</a></li>
+          <li><a href="#" data-type="sub" data-target="type-suv">休旅車</a></li>
+          <li><a href="#" data-type="sub" data-target="type-gt">GT 房車</a></li>
+          <li><a href="#" data-type="sub" data-target="type-roadster">敞篷車 / Roadster</a></li>
+          <li><a href="#" data-type="sub" data-target="type-track">賽道車 / Track-only</a></li>
+          <li><a href="#" data-type="sub" data-target="type-ev">混合動力 / 電動超跑</a></li>
+        </ul>
+      </li>
+      <li class="color-black">
+        <div class="main" data-type="main" data-target="brands">🏷 品牌分類</div>
+        <ul class="subs">
+          <li><a href="#" data-type="sub" data-target="brand-ferrari">Ferrari 法拉利</a></li>
+          <li><a href="#" data-type="sub" data-target="brand-lambo">Lamborghini 藍寶堅尼</a></li>
+          <li><a href="#" data-type="sub" data-target="brand-mclaren">McLaren 麥拉倫</a></li>
+          <li><a href="#" data-type="sub" data-target="brand-bugatti">Bugatti 布加迪</a></li>
+          <li><a href="#" data-type="sub" data-target="brand-porsche">Porsche 保時捷</a></li>
+        </ul>
+      </li>
+      <li class="color-black">
+        <div class="main" data-type="main" data-target="guide">🧭 購車指南</div>
+        <ul class="subs">
+          <li><a href="#" data-type="sub" data-target="guide-choose">如何選擇適合你的超跑</a></li>
+          <li><a href="#" data-type="sub" data-target="guide-care">超跑保養知識</a></li>
+          <li><a href="#" data-type="sub" data-target="guide-faq">常見問題</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div id="contents">
+    <div id="news" class="content-block">
+      <h1>最新消息</h1>
+      <div class="news-grid">
+        <div class="news-item">
+          <img src="images/news1.jpg" alt="車1">
+          <div class="news-title">Revuelto全新大牛V12油電超跑台灣發表！</div>
+        </div>
+        <div class="news-item">
+          <img src="images/news2.jpg" alt="車2">
+          <div class="news-title">最速量產車Bugatti Chiron Super Sport限量30台問世！</div>
+        </div>
+        <div class="news-item">
+          <img src="images/news3.jpg" alt="車3">
+          <div class="news-title">土豪金保時捷911 Turbo S Exclusive 有錢買不到</div>
+        </div>
+        <div class="news-item">
+          <img src="images/news4.jpg" alt="車4">
+          <div class="news-title">McLaren首款油電混合敞篷跑車Artura Spider在台上市！</div>
+        </div>
+        <div class="news-item">
+          <img src="images/news5.jpg" alt="車5">
+          <div class="news-title">【全台首發】GT至尊 Mercedes-AMG GT Black Series</div>
+        </div>
+        <div class="news-item">
+          <img src="images/news6.jpg" alt="車6">
+          <div class="news-title">0-1000m加速實測Chevrolet C7 Corvette Z06</div>
+        </div>
+      </div>
+    </div>
+  
+      <div id="car-overview" class="content-block" style="display: none;">
+        <h1>車種分類</h1>
+        <div class="car-grid">
+          <div class="car-box" onclick="location.href='sports.html'">
+            <img src="images/sport_car.jpg" alt="跑車">
+             <div class="car-box-title">跑車</div>
+          </div>
+          <div class="car-box" onclick="location.href='suv.html'">
+            <img src="images/SUV.jpg" alt="休旅車">
+             <div class="car-box-title">休旅車</div>
+          </div>
+          <div class="car-box" onclick="location.href='gt.html'">
+            <img src="images/GT.jpg" alt="GT 房車">
+             <div class="car-box-title">GT房車</div>
+          </div>
+          <div class="car-box" onclick="location.href='roadster.html'">
+            <img src="images/roadster.jpg" alt="敞篷車">
+             <div class="car-box-title">敞篷車</div>
+          </div>
+          <div class="car-box" onclick="location.href='track.html'">
+            <img src="images/track.jpg" alt="賽道車">
+             <div class="car-box-title">賽道車</div>
+          </div>
+          <div class="car-box" onclick="location.href='ev.html'">
+            <img src="images/ev.jpg" alt="電動超跑">
+             <div class="car-box-title">電動超跑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>超跑資訊網</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <script src="jquery-1.10.2.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'GenSyuansyuan Medium';
+    }
+    #header {
+      position: relative;
+      width: 100%;
+      height: 900px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    #slider {
+      display: flex;
+      width: calc(1920px * 5);
+      height: 900px;
+      transition: transform 0.8s ease-in-out;
+    }
+    .slide {
+      width: 1920px;
+      height: 900px;
+      object-fit: cover;
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 60px;
+      color: white;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .arrow:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .arrow-left {
+      left: 10px;
+    }
+    .arrow-right {
+      right: 10px;
+    }
+    #top-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #top-view ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    }
+
+    #top-view ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    padding-right: 40px;
+    }
+
+    #top-view ul li a:hover {
+    text-decoration: underline;
+    }
+#wrapper-car {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+}
+
+#car-info {
+  text-align: center;
+}
+
+.spec-basic {
+  margin-top: 20px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.spec {
+  margin: 20px auto;
+  width: 600px;
+  text-align: left;
+  font-size: 24px;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.bar-container {
+  width: 100%;
+  background-color: #eee;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.bar {
+  height: 12px;
+  background-color: black;
+  border-radius: 6px 0 0 6px;
+}
+
+.value {
+  text-align: right;
+  font-size: 20px;
+  color: #FFF;
+}
+
+
+
+  </style>
+  <script>
+    $(function(){
+      $("ul.subs").hide();
+      $("div.main").click(function(){
+        $("ul.subs").slideUp();
+        $("div.main").removeClass("open");
+        if($("+ul",this).css("display")=="none"){
+          $("+ul",this).slideDown();
+          $(this).addClass("open");
+        }
+        }).mouseover(function () {
+        	$(this).addClass("rollover");
+        }).mouseout(function(){
+            $(this).removeClass("rollover");
+        });
+
+      let currentIndex = 0;
+      const totalSlides = 5;
+
+      function updateSlider() {
+        $('#slider').css('transform', `translateX(${-1920 * currentIndex}px)`);
+      }
+
+      $('.arrow-right').click(function () {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+      });
+
+      $('.arrow-left').click(function () {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      });
+
+      setInterval(function () {
+        $('.arrow-right').click();
+      }, 6000);
+    });
+
+
+  </script>
+</head>
+<body>
+    <div id="top-view">
+    <ul>
+      <li><a href="#">首頁.HOME</a></li>
+      <li><a href="#">聯絡我們</a></li>
+    </ul>
+  </div>
+  <div id="header">
+    <div id="slider">
+      <img src="images/background1.jpg" class="slide" />
+      <img src="images/background2.jpg" class="slide" />
+      <img src="images/background3.jpg" class="slide" />
+      <img src="images/background4.jpg" class="slide" />
+      <img src="images/background5.jpg" class="slide" />
+    </div>
+    <div class="arrow arrow-left">&#10094;</div>
+    <div class="arrow arrow-right">&#10095;</div>
+    <div id="header-nav">
+      <ul>
+        <li><a href="slid.html">首頁.HOME</a></li>
+        <li><a href="#">聯絡我們</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="wrapper-car" class="clearfix">
+    <div id="car-info" style="text-align: center; padding: 40px;">
+      <img src="images/ev.jpg" alt="Car Image" style="width: 1200px; height: auto; border-radius: 30px;">
+      <div class="spec-basic">
+        <div class="item">汽缸數：電動馬達</div>
+      </div>
+      <div class="spec">
+        <div class="label">極速</div>
+        <div class="bar-container">
+          <div class="bar" style="width: calc(0 / 350 * 100%)"></div>
+        </div>
+      <div class="value">未公開</div>
+    </div>
+
+        <div class="spec">
+          <div class="label">0~100km 加速</div>
+          <div class="bar-container">
+            <div class="bar" style="width: calc(0 / 10 * 100%)"></div>
+          </div>
+          <div class="value">未公開</div>
+        </div>
+
+        <div class="spec">
+          <div class="label">油耗</div>
+          <div class="bar-container">
+            <div class="bar" style="width: calc(0 / 12 * 100%)"></div>
+          </div>
+          <div class="value">無油耗</div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+  </html>

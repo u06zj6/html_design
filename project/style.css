@@ -1,0 +1,285 @@
+﻿@charset "utf-8";
+@font-face {
+  font-family: 'GenSyuansyuan Medium';
+  src: url('GenSyuansyuan-Medium.woff2') format('woff2'),
+       url('GenSyuansyuan-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+/* ------- base ------- */
+body{
+	background:#1c1c1c;
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size:14px;
+	color: #FFF;
+}
+
+body, ul, li, div {
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border:0;
+}
+
+a {
+	text-decoration:none;
+}
+
+.clearfix:after {
+	height: 0;
+	visibility: hidden;
+	content: ".";
+	display: block;
+	clear: both;
+}
+
+/* ------- header ------- */
+#header {
+	width:100%;
+	height: 35px;
+	background-color:#333;
+}
+
+#header-inner {
+	width: 740px;
+	height: 35px;
+	margin: 0 auto;
+}
+
+#logo {
+	float: left;
+	padding-top: 5px;
+}
+
+#header-nav {
+	float: right;
+	padding-top: 8px;
+}
+
+#header-nav li {
+	float: left;
+	padding-left: 15px;
+	list-style-type: none;
+}
+
+/* ------- wrapper ------- */
+* {
+  box-sizing: border-box;
+}
+
+#wrapper {
+  display: flex;
+  width: 1800px;
+  margin-left: 20px;
+  padding: 40px 0;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* ------- nav ------- */
+#nav, #nav .main, #nav .subs li a {
+  font-family: 'GenSyuansyuan Medium', sans-serif;
+}
+#nav {
+
+  width: 300px;
+}
+#nav-car{
+  width: 1000px;
+  height: 600px;
+}
+
+#nav li {
+  list-style: none;
+  width: 300px;
+}
+
+div.main {
+  display: flex;
+  align-items: center;        
+  padding-left: 42px;         
+  height: 60px;
+  font-size: 20px;
+  background-color: #1c2430;
+  color: #dce3ec;
+  cursor: pointer;
+}
+
+div.main:hover {
+  background-color: #202630;
+}
+
+ul.subs {
+  overflow: hidden;
+  background-color: #1c3022;
+}
+
+ul.subs li {
+  width: 100%;
+}
+
+ul.subs li a {
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  text-indent: 25px;
+  font-size: 14px;
+  background-color: #1c2430;
+  color: #dce3ec;
+  width: 100%;
+  border-right: 10px solid transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ------- color selection ------- */
+/* main menu*/
+li.color-black div.main {
+	background-color:#2a3545;
+	border-right:10px solid #202630;
+}
+/* sub menu*/
+li.color-black ul.subs li a {
+	border-right:10px solid #1a1f28;
+	color:#FFF;
+}
+li.color-black ul.subs li a:hover {
+	background-color: #2a3545;
+	color: #fff;
+}
+/* ------- sub menu open ------- */
+li.color-black div.open {
+	background:url("images/arrow.png") no-repeat #202630 28px bottom;
+}
+/* ------- mouseover ------- */
+li.color-black div.rollover {
+	background-color: #202630;
+}
+
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /*3*2*/
+  gap: 20px;
+  margin-top: 20px;
+}
+.news-item {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgb(255, 2, 2); 
+  text-align: center;
+  transition: transform 0.3s;
+  color: none;
+}
+.news-item img {
+  width: 100%;
+  display: block;
+}
+.news-item:hover {
+  transform: scale(1.03);
+}
+.news-title {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: none;
+  
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.car-box {
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 8px rgb(255, 2, 2); 
+  padding: 10px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+.car-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.car-box img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.car-box-title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFF;
+}
+
+
+/* ------- contents ------- */
+#contents {
+  flex-shrink: 0;
+  width: 1440px;
+  min-height: 300px; /* 可視情況給個基本高度 */
+  background-color: #1c1c1c;
+  padding: 20px;
+  color: #fff;
+
+  /* 關鍵 */
+  overflow: hidden;        /* 防止內部溢出擠壞版面 */
+  box-sizing: border-box;  /* 讓 padding 不影響寬度 */
+  flex-shrink: 0;          /* 在 flex 裡，避免被壓縮 */
+}
+#contents .content-block {
+	display: none;
+	padding: 20px;
+	background: none;
+	margin-top: 10px;
+}
+
+#default-content {
+    display: block;
+}
+#nav ul li .main {
+	cursor: pointer;
+}
+
+#contents img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+#contents h1 {
+	margin-bottom:5px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 24px;
+	color:#F7F7F7;
+	text-align:center;
+}
+
+#contents p {
+	width: 400px;
+	margin: 0 auto 35px;
+	font-size: 12px;
+	line-height: 2;
+	color:#FFF;
+}
+
+/* ------- footer ------- */
+#footer {
+	width:100%;
+	height: 60px;
+	background-color: #ECECEC;
+	bottom:0;
+	position:fixed;
+}
+
+#footer-inner {
+	padding-top:22px;
+	font-size: 10px;
+	text-align:center;
+	color:#666;
+}
